@@ -102,12 +102,28 @@ FSD activates when **"Traffic Light and Stop Sign Control"** is enabled in your 
 
 ## Compatibility
 
-| Vehicle | HW Version | Firmware | Mode |
-|---------|-----------|----------|------|
-| Model 3/Y (2019-2023) | HW3 | Any | HW3 |
-| Model 3/Y (2023+) | HW4 | < 2026.2.3 | **HW3** |
-| Model 3/Y (2023+) | HW4 | >= 2026.2.3 | HW4 |
-| Model S/X (2021+) | HW4 | >= 2026.2.3 | HW4 |
+| Vehicle | HW Version | Firmware | Mode | Status |
+|---------|-----------|----------|------|--------|
+| Model 3/Y (2019-2023) | HW3 | Any | HW3 | Supported |
+| Model 3/Y (2023+) | HW4 | < 2026.2.3 | **HW3** | Supported |
+| Model 3/Y (2023+) | HW4 | >= 2026.2.3 | HW4 | Supported |
+| Model S/X (2021+) | HW4 | >= 2026.2.3 | HW4 | Supported |
+| Model S/X (2016-2019) | HW1/HW2 | Any | Legacy | **Looking for testers** |
+
+### HW1/HW2 Legacy Support — Volunteers Needed
+
+Older Model S/X vehicles (2016-2019) use a Mobileye-based architecture with different CAN IDs. The autopilot control frame is on `0x3EE` (1006) instead of `0x3FD` (1021), and the bit layout differs.
+
+The logic is already documented (see [CanFeather LegacyHandler](https://gitlab.com/Starmixcraft/tesla-fsd-can-mod)), but we need someone with a HW1/HW2 car to validate it before we ship.
+
+**If you have a 2016-2019 Model S/X with FSD and want to help:**
+
+1. Hook up Flipper + CAN Add-On to OBD-II
+2. Open the stock CAN sniffer app
+3. Confirm CAN ID `0x3EE` (1006) appears on the bus
+4. Capture a few frames and post them in [issue #1](https://github.com/hypery11/flipper-tesla-fsd/issues/1)
+
+Once verified, Legacy support is a quick add.
 
 ---
 
